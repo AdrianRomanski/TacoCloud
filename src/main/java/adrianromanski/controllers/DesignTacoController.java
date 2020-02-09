@@ -23,29 +23,14 @@ import adrianromanski.model.Taco;
 import adrianromanski.repositories.IngredientRepository;
 import adrianromanski.repositories.TacoRepository;
 
-//tag::injectingDesignRepository[]
-//tag::injectingIngredientRepository[]
 @Controller
 @RequestMapping("/design")
-//end::injectingIngredientRepository[]
 @SessionAttributes("order")
-//tag::injectingIngredientRepository[]
 public class DesignTacoController {
 
   private final IngredientRepository ingredientRepo;
 
-  //end::injectingIngredientRepository[]
   private TacoRepository tacoRepo;
-
-  //end::injectingDesignRepository[]
-  /*
-  //tag::injectingIngredientRepository[]
-  public DesignTacoController(IngredientRepository ingredientRepo) {
-    this.ingredientRepo = ingredientRepo;
-  }
-  //end::injectingIngredientRepository[]
-   */
-  //tag::injectingDesignRepository[]
 
   @Autowired
   public DesignTacoController(
@@ -65,9 +50,6 @@ public class DesignTacoController {
     return new Taco();
   }
 
-  //end::injectingDesignRepository[]
-
-  //tag::injectingIngredientRepository[]
 
   @GetMapping
   public String showDesignForm(Model model) {
@@ -82,9 +64,7 @@ public class DesignTacoController {
 
     return "design";
   }
-  //end::injectingIngredientRepository[]
 
-//tag::injectingDesignRepository[]
   @PostMapping
   public String processDesign(
       @Valid Taco taco, Errors errors,
@@ -100,8 +80,6 @@ public class DesignTacoController {
     return "redirect:/orders/current";
   }
 
-//end::injectingDesignRepository[]
-
   private List<Ingredient> filterByType(
       List<Ingredient> ingredients, Type type) {
     return ingredients
@@ -109,19 +87,5 @@ public class DesignTacoController {
               .filter(x -> x.getType().equals(type))
               .collect(Collectors.toList());
   }
-
-  /*
-  //tag::injectingDesignRepository[]
-  //tag::injectingIngredientRepository[]
-
-   ...
-  //end::injectingIngredientRepository[]
-  //end::injectingDesignRepository[]
-  */
-
-//tag::injectingDesignRepository[]
-//tag::injectingIngredientRepository[]
-
 }
-//end::injectingIngredientRepository[]
-//end::injectingDesignRepository[]
+
